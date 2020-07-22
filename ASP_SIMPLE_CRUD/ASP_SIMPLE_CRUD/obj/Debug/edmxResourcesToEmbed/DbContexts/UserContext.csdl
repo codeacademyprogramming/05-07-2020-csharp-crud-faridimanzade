@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="test1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Classroom">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="number" Type="Int32" />
+    <Property Name="floor" Type="Int32" />
+    <NavigationProperty Name="StudentsClassrooms" Relationship="Self.FK__StudentsC__class__5CD6CB2B" FromRole="Classrooms" ToRole="StudentsClassrooms" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="age" Type="Int32" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__customer__5441852A" FromRole="Customers" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="hash" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="date" Type="DateTime" Precision="3" />
+    <Property Name="customer_id" Type="Int32" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK__Orders__customer__5441852A" FromRole="Orders" ToRole="Customers" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="student_card_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="StudentsClassrooms" Relationship="Self.FK__StudentsC__stude__5BE2A6F2" FromRole="Students" ToRole="StudentsClassrooms" />
+  </EntityType>
+  <EntityType Name="StudentsClassroom">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="student_id" Type="Int32" />
+    <Property Name="classroom_id" Type="Int32" />
+    <NavigationProperty Name="Classroom" Relationship="Self.FK__StudentsC__class__5CD6CB2B" FromRole="StudentsClassrooms" ToRole="Classrooms" />
+    <NavigationProperty Name="Student" Relationship="Self.FK__StudentsC__stude__5BE2A6F2" FromRole="StudentsClassrooms" ToRole="Students" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="age" Type="Int16" />
+  </EntityType>
+  <Association Name="FK__StudentsC__class__5CD6CB2B">
+    <End Role="Classrooms" Type="Self.Classroom" Multiplicity="0..1" />
+    <End Role="StudentsClassrooms" Type="Self.StudentsClassroom" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Classrooms">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="StudentsClassrooms">
+        <PropertyRef Name="classroom_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__customer__5441852A">
+    <End Role="Customers" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="customer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StudentsC__stude__5BE2A6F2">
+    <End Role="Students" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="StudentsClassrooms" Type="Self.StudentsClassroom" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="StudentsClassrooms">
+        <PropertyRef Name="student_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="test1Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Classrooms" EntityType="Self.Classroom" />
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="Orders" EntityType="Self.Order" />
+    <EntitySet Name="Persons" EntityType="Self.Person" />
+    <EntitySet Name="Students" EntityType="Self.Student" />
+    <EntitySet Name="StudentsClassrooms" EntityType="Self.StudentsClassroom" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK__StudentsC__class__5CD6CB2B" Association="Self.FK__StudentsC__class__5CD6CB2B">
+      <End Role="Classrooms" EntitySet="Classrooms" />
+      <End Role="StudentsClassrooms" EntitySet="StudentsClassrooms" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__customer__5441852A" Association="Self.FK__Orders__customer__5441852A">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StudentsC__stude__5BE2A6F2" Association="Self.FK__StudentsC__stude__5BE2A6F2">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="StudentsClassrooms" EntitySet="StudentsClassrooms" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

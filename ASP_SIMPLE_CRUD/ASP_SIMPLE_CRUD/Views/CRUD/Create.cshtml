@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+}
+
+@model ASP_SIMPLE_CRUD.Models.User
+
+<h2>Create</h2>
+
+
+<form action="/CRUD/Create" method="post" class="bg-dark col-8 mx-auto d-flex flex-column rounded-lg">
+    <div class="row my-2 flex-column pb-3 border-bottom border-info">
+        @Html.LabelFor(x => x.Name, new { @class = "d-block mx-auto text-info", @style = "font-size:35px;" })
+        <input type="text" name="Name" value="" required="required" class="mx-auto" placeholder="Enter Name" />
+    </div>
+    <hr />
+
+    <div class="row my-2 flex-column pb-3 border-bottom border-info">
+        @Html.LabelFor(x => x.Surname, new { @class = "d-block mx-auto text-info", @style = "font-size:35px;" })
+        <input type="text" name="Surname" value="" required="required" class="mx-auto" placeholder="Enter Surname" />
+    </div>
+    <div class="row my-2 flex-column pb-3 border-bottom border-info">
+        @Html.LabelFor(x => x.Age, new { @class = "d-block mx-auto text-info", @style = "font-size:35px;" })
+        <input type="number" name="Age" value="" required="required" class="mx-auto" min="0" placeholder="Enter Age" />
+    </div>
+
+    <div class="row mt-5 mb-2 flex-column">
+        <input class="btn btn-success mx-auto" type="Submit" value="Create" />
+    </div>
+</form>
+
+@Html.ActionLink("Go To List", "Index", "Crud", new { @class = "btn btn-info my-2" })

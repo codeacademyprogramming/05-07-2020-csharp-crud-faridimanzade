@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+}
+
+@model ASP_SIMPLE_CRUD.Models.User
+
+<h2>Edit</h2>
+
+@Html.ValidationSummary()
+
+<form action="/CRUD/Edit" method="post" class="bg-dark col-8 mx-auto d-flex flex-column rounded-lg">
+    <input type="hidden" name="id" value="@Model.id" />
+
+    <div class="row my-2 flex-column pb-3 border-bottom border-info">
+        @Html.LabelFor(x => x.Name, new { @class = "d-block mx-auto text-info", @style = "font-size:35px;" })
+        @Html.TextBoxFor(x => x.Name, "", new { @class = "mx-auto", @placeholder = "Enter Name" })
+    </div>
+    <hr />
+
+    <div class="row my-2 flex-column pb-3 border-bottom border-info">
+        @Html.LabelFor(x => x.Surname, new { @class = "d-block mx-auto text-info", @style = "font-size:35px;" })
+        @Html.TextBoxFor(x => x.Surname, "", new { @class = "mx-auto", @placeholder = "Enter Surname" })
+    </div>
+    <div class="row my-2 flex-column pb-3 border-bottom border-info">
+        @Html.LabelFor(x => x.Age, new { @class = "d-block mx-auto text-info", @style = "font-size:35px;" })
+        @Html.TextBoxFor(x => x.Age, "", new { @class = "mx-auto", @placeholder = "Enter Name", @type = "number" })
+    </div>
+
+    <div class="row mt-5 mb-2 flex-column">
+        <input class="btn btn-success mx-auto" type="Submit" value="Save" />
+    </div>
+</form>
+
+@Html.ActionLink("Go To List", "Index", "Crud", new { @class = "btn btn-info my-2" })

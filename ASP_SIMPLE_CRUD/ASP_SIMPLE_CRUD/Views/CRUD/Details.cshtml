@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Details";
+}
+
+@model ASP_SIMPLE_CRUD.Models.User
+
+<h2>Details</h2>
+
+<div class="container">
+    <div class="card col-5">
+        <div class="row my-2">
+            <div class="col"> <h3 class="text-dark d-inline">Name:</h3> <h3 class="text-warning d-inline"> @Model.Name</h3></div>
+        </div>
+        <div class="row my-2">
+            <div class="col text-primary"><h3 class="text-dark d-inline">Surname:</h3> <h3 class="text-warning d-inline"> @Model.Surname</h3></div>
+        </div>
+        <div class="row my-2">
+            <div class="col text-primary"><h3 class="text-dark d-inline">Age:</h3> <h3 class="text-warning d-inline"> @Model.Age</h3></div>
+        </div>
+        @Html.ActionLink("Go To List", "Index","Crud", new { @class = "btn btn-info my-2" })
+    </div>
+</div>
